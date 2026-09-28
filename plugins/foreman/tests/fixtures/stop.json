@@ -1,0 +1,11 @@
+{
+  "session_id": "fixture-session",
+  "transcript_path": null,
+  "cwd": ".",
+  "hook_event_name": "Stop",
+  "model": "fixture-model",
+  "permission_mode": "default",
+  "turn_id": "fixture-turn",
+  "stop_hook_active": false,
+  "last_assistant_message": "Implementation and verification are complete."
+}

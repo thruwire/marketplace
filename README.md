@@ -1,8 +1,8 @@
 # ThruWire Marketplace
 
-The ThruWire marketplace is the publisher-owned catalog for ThruWire agent plugins. Plugin
-implementations remain with their product repositories so their protocol adapters and compatible
-runtime versions can be reviewed and released together.
+The ThruWire marketplace is the publisher-owned catalog and source repository for ThruWire agent
+plugins. Keeping installable packages in the marketplace checkout lets Codex read their manifests
+and assets before installation, so the Plugins Directory can render complete listings.
 
 ## Codex
 
@@ -14,8 +14,10 @@ codex plugin add foreman@thruwire
 ```
 
 The catalog entry in [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) points
-to `integrations/codex` in [`thruwire/foreman`](https://github.com/thruwire/foreman). Codex fetches
-and caches that Git subdirectory; users do not need a local clone of Foreman.
+to the package at [`plugins/foreman`](plugins/foreman). Keeping the complete package—including
+`assets/icon.png` and `assets/logo.svg`—inside the marketplace checkout lets the Plugins Directory
+render Foreman's name, description, and icon before installation. Users do not need a local clone
+of either repository.
 
 Foreman itself remains a separate runtime dependency:
 

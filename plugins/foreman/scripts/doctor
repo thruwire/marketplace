@@ -1,0 +1,82 @@
+#!/bin/sh
+
+minimum_version=0.4.1
+
+fail() {
+    printf 'FAIL: %s\n' "$1" >&2
+    exit 1
+}
+
+pass() {
+    printf 'OK: %s\n' "$1"
+}
+
+foreman_executable=$(command -v foreman 2>/dev/null) ||
+    fail 'foreman is not on PATH. Install it with `pipx install foreman-core` or `uv tool install foreman-core`.'
+pass "foreman executable: $foreman_executable"
+
+version_output=$("$foreman_executable" --version 2>/dev/null || true)
+installed_version=$(printf '%s\n' "$version_output" | sed -nE 's/.*[^0-9]([0-9]+\.[0-9]+\.[0-9]+([.+-][0-9A-Za-z.-]+)?).*/\1/p' | sed -n '1p')
+
+if [ -z "$installed_version" ]; then
+    IFS= read -r shebang < "$foreman_executable" || true
+    case "$shebang" in
+        '#!'*) foreman_python=${shebang#\#!} ;;
+        *) foreman_python= ;;
+    esac
+    if [ -n "$foreman_python" ] && [ -x "$foreman_python" ]; then
+        installed_version=$(
+            "$foreman_python" -c \
+                'from importlib.metadata import version; print(version("foreman-core"))' \
+                2>/dev/null || true
+        )
+    fi
+fi
+
+[ -n "$installed_version" ] ||
+    fail 'could not determine the installed foreman-core version.'
+
+version_check=$(python3 - "$installed_version" "$minimum_version" <<'PY'
+import re
+import sys
+
+def release(value: str) -> tuple[int, int, int]:
+    match = re.match(r"^(\d+)\.(\d+)\.(\d+)", value)
+    if match is None:
+        raise ValueError(value)
+    return tuple(map(int, match.groups()))
+
+try:
+    print("ok" if release(sys.argv[1]) >= release(sys.argv[2]) else "old")
+except ValueError:
+    print("invalid")
+PY
+) || fail 'python3 is required to compare the foreman-core version.'
+
+case "$version_check" in
+    ok) pass "foreman-core $installed_version satisfies >= $minimum_version" ;;
+    old) fail "foreman-core $installed_version is too old; version $minimum_version or newer is required." ;;
+    *) fail "foreman-core reported an unrecognized version: $installed_version" ;;
+esac
+
+[ -n "${TYPESAFE_API_KEY:-}" ] ||
+    fail 'TYPESAFE_API_KEY is not set in this process environment.'
+pass 'TYPESAFE_API_KEY is set (value not displayed)'
+
+doctor_tmp=$(mktemp -d "${TMPDIR:-/tmp}/foreman-codex-doctor.XXXXXX") ||
+    fail 'could not create a temporary directory.'
+trap 'rm -rf "$doctor_tmp"' EXIT HUP INT TERM
+
+if "$foreman_executable" extension status >"$doctor_tmp/stdout" 2>"$doctor_tmp/stderr"; then
+    pass 'Foreman configuration loaded successfully'
+else
+    printf '%s\n' 'FAIL: Foreman could not load its configuration.' >&2
+    if [ -s "$doctor_tmp/stderr" ]; then
+        sed 's/^/  /' "$doctor_tmp/stderr" >&2
+    elif [ -s "$doctor_tmp/stdout" ]; then
+        sed 's/^/  /' "$doctor_tmp/stdout" >&2
+    fi
+    exit 1
+fi
+
+printf '%s\n' 'Foreman is ready for Codex.'

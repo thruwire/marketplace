@@ -1,0 +1,10 @@
+#!/bin/sh
+
+foreman_executable=$(command -v foreman 2>/dev/null) || {
+    printf '%s\n' \
+        'foreman Codex integration: foreman was not found on PATH; install foreman-core >= 0.4.1 with `pipx install foreman-core` or `uv tool install foreman-core`.' \
+        >&2
+    exit 127
+}
+
+exec "$foreman_executable" hook --client codex

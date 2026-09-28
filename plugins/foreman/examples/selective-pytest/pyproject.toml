@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "foreman-selective-pytest-example"
+version = "0.1.0"
+description = "Example selectively routed pytest responsibility for Foreman"
+requires-python = ">=3.11"
+dependencies = ["foreman-core>=0.4.1"]
+
+[project.entry-points."foreman.extensions"]
+selective-pytest = "foreman_selective_pytest:extension"
+
+[tool.setuptools]
+packages = ["foreman_selective_pytest"]
+package-dir = {"" = "src"}

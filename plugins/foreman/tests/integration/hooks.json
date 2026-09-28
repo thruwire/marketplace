@@ -1,0 +1,66 @@
+{
+  "description": "Project-scoped mirror used only for live hook-runtime integration tests.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${FOREMAN_PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

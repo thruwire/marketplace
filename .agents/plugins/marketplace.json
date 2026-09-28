@@ -7,10 +7,8 @@
     {
       "name": "foreman",
       "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/thruwire/foreman.git",
-        "path": "./integrations/codex",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/foreman"
       },
       "policy": {
         "installation": "AVAILABLE",

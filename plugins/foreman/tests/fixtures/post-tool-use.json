@@ -1,0 +1,18 @@
+{
+  "session_id": "fixture-session",
+  "transcript_path": null,
+  "cwd": ".",
+  "hook_event_name": "PostToolUse",
+  "model": "fixture-model",
+  "permission_mode": "default",
+  "turn_id": "fixture-turn",
+  "tool_name": "Bash",
+  "tool_use_id": "fixture-tool",
+  "tool_input": {
+    "command": "git status --short"
+  },
+  "tool_response": {
+    "output": "",
+    "exit_code": 0
+  }
+}

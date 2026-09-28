@@ -1,0 +1,72 @@
+{
+  "description": "Forward supported Codex lifecycle events to Foreman.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "statusMessage": "Attaching Foreman supervisor"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "statusMessage": "Routing work through Foreman"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "statusMessage": "Foreman is reviewing tool use"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "statusMessage": "Foreman is reviewing tool output"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "statusMessage": "Foreman is checking completion"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "timeout": 3,
+            "statusMessage": "Closing Foreman session"
+          }
+        ]
+      }
+    ]
+  }
+}

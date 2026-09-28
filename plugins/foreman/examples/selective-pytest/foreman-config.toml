@@ -1,0 +1,6 @@
+[extensions."selective-pytest"]
+
+[[evidence.commands]]
+id = "pytest"
+command = ["pytest", "-q"]
+timeout_seconds = 120

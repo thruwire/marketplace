@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Foreman app icon: four seamless tiles + outlined orange hard hat -->
+  <defs>
+    <clipPath id="tilesClip">
+      <rect x="124" y="122" width="776" height="776" rx="76" ry="76"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1024" height="1024" fill="#ffffff"/>
+
+  <!-- Four seamless background tiles; only outside corners are rounded -->
+  <g clip-path="url(#tilesClip)">
+    <rect x="124" y="122" width="388" height="388" fill="#eeeae2"/>
+    <rect x="512" y="122" width="388" height="388" fill="#b8c9da"/>
+    <rect x="124" y="510" width="388" height="388" fill="#cbd0d4"/>
+    <rect x="512" y="510" width="388" height="388" fill="#8999ab"/>
+  </g>
+
+  <!-- White outline around hard hat only -->
+  <path d="M207 645
+           Q207 620 231 614
+           L247 614
+           Q252 490 319 407
+           Q367 349 423 330
+           L423 318
+           Q423 285 456 285
+           L568 285
+           Q601 285 601 318
+           L601 330
+           Q657 349 705 407
+           Q772 490 777 614
+           L793 614
+           Q817 620 817 645
+           Q817 670 793 676
+           L231 676
+           Q207 670 207 645 Z" fill="#ffffff"/>
+
+  <!-- Orange hard hat -->
+  <path d="M219 645
+           Q219 631 235 627
+           L259 627
+           Q262 507 327 421
+           Q370 365 437 343
+           L437 318
+           Q437 299 456 299
+           L568 299
+           Q587 299 587 318
+           L587 343
+           Q654 365 697 421
+           Q762 507 765 627
+           L789 627
+           Q805 631 805 645
+           Q805 659 789 663
+           L235 663
+           Q219 659 219 645 Z" fill="#ff6500"/>
+
+  <!-- Helmet ridge cutouts -->
+  <path d="M437 343 L437 526 Q437 548 456 565 L456 343 Z" fill="#ffffff"/>
+  <path d="M587 343 L587 526 Q587 548 568 565 L568 343 Z" fill="#ffffff"/>
+  <rect x="456" y="299" width="112" height="244" rx="0" fill="#ff6500"/>
+</svg>

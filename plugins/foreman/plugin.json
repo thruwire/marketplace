@@ -1,0 +1,42 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "foreman",
+  "version": "0.1.0",
+  "description": "An agent supervisor and software factory foreman powered by TypeSafe’s Jev model",
+  "author": {
+    "name": "ThruWire",
+    "url": "https://thruwire.ai"
+  },
+  "homepage": "https://github.com/thruwire/marketplace/tree/main/plugins/foreman",
+  "repository": "https://github.com/thruwire/marketplace",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "foreman",
+    "supervision",
+    "coding-agents"
+  ],
+  "extensions": {
+    "com.openai": {
+      "hooks": "./hooks/hooks.json",
+      "interface": {
+        "displayName": "Foreman",
+        "shortDescription": "A Jev-powered supervisor for coding agents",
+        "longDescription": "An agent supervisor and software factory foreman powered by TypeSafe’s Jev model",
+        "developerName": "ThruWire",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Lifecycle Hooks"
+        ],
+        "websiteURL": "https://thruwire.ai",
+        "defaultPrompt": [
+          "Check my Foreman setup.",
+          "Explain how Foreman is supervising this session."
+        ],
+        "brandColor": "#FF6500",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.svg"
+      }
+    }
+  }
+}

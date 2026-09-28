@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+"""Measure end-to-end launcher latency for the latency-sensitive hooks."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import statistics
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+LAUNCHER = ROOT / "scripts" / "foreman-hook"
+DEFAULT_EVENTS = (
+    ROOT / "tests" / "fixtures" / "pre-tool-use.json",
+    ROOT / "tests" / "fixtures" / "post-tool-use.json",
+    ROOT / "tests" / "fixtures" / "stop.json",
+)
+
+
+def percentile(samples: list[float], fraction: float) -> float:
+    ordered = sorted(samples)
+    index = min(len(ordered) - 1, round((len(ordered) - 1) * fraction))
+    return ordered[index]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--iterations", type=int, default=5)
+    parser.add_argument("events", nargs="*", type=Path)
+    args = parser.parse_args()
+    if args.iterations < 1:
+        parser.error("--iterations must be at least 1")
+
+    events = args.events or list(DEFAULT_EVENTS)
+    environment = os.environ.copy()
+    for event_path in events:
+        payload = event_path.read_bytes()
+        parsed = json.loads(payload)
+        name = parsed.get("hook_event_name", event_path.stem)
+        samples: list[float] = []
+        for _ in range(args.iterations):
+            started = time.perf_counter()
+            result = subprocess.run(
+                [LAUNCHER],
+                input=payload,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=environment,
+                check=False,
+            )
+            samples.append((time.perf_counter() - started) * 1000)
+            if result.returncode != 0:
+                sys.stderr.buffer.write(result.stderr)
+                print(f"{name}: foreman exited {result.returncode}", file=sys.stderr)
+                return result.returncode
+            try:
+                json.loads(result.stdout)
+            except json.JSONDecodeError as error:
+                print(f"{name}: invalid protocol JSON: {error}", file=sys.stderr)
+                return 1
+        print(
+            f"{name}: n={len(samples)} "
+            f"min={min(samples):.1f}ms "
+            f"p50={statistics.median(samples):.1f}ms "
+            f"p95={percentile(samples, 0.95):.1f}ms "
+            f"max={max(samples):.1f}ms"
+        )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
