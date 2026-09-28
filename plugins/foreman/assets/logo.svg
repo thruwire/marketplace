@@ -1,9 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <!-- Foreman app icon: four seamless full-bleed tiles + outlined orange hard hat -->
-  <rect x="0" y="0" width="512" height="512" fill="#eeeae2"/>
-  <rect x="512" y="0" width="512" height="512" fill="#b8c9da"/>
-  <rect x="0" y="512" width="512" height="512" fill="#cbd0d4"/>
-  <rect x="512" y="512" width="512" height="512" fill="#8999ab"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="124 122 776 776" width="1024" height="1024">
+  <!-- Foreman app icon: crop the canvas to the original four-tile field -->
+  <defs>
+    <clipPath id="canvasClip">
+      <rect x="124" y="122" width="776" height="776" rx="76" ry="76"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#canvasClip)">
+    <rect x="124" y="122" width="388" height="388" fill="#eeeae2"/>
+    <rect x="512" y="122" width="388" height="388" fill="#b8c9da"/>
+    <rect x="124" y="510" width="388" height="388" fill="#cbd0d4"/>
+    <rect x="512" y="510" width="388" height="388" fill="#8999ab"/>
+  </g>
 
   <!-- White outline around hard hat only -->
   <path d="M207 645
