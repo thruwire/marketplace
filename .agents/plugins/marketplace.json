@@ -1,0 +1,22 @@
+{
+  "name": "thruwire",
+  "interface": {
+    "displayName": "ThruWire Plugins"
+  },
+  "plugins": [
+    {
+      "name": "foreman",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/thruwire/foreman.git",
+        "path": "./integrations/codex",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
