@@ -21,10 +21,11 @@ render Foreman's name, description, and icon before installation. Users do not n
 of either repository.
 
 The [ThruWire plugin](plugins/thruwire) connects to the hosted factory MCP server.
-It uses the installing user's ThruWire authentication and has no local runtime
-dependency. For cloud dots, install and authenticate it in the dot's ChatGPT
-account as well; the Codex-local connection is separate. See the package README
-for archive installation and monitoring setup.
+It uses the installing user's ThruWire authentication and has no local server
+dependency. The marketplace package is validated for local use. ChatGPT cloud
+dots require a supported account-level MCP plugin connection; importing this
+package alone does not provide one. See the package README for the verified
+local behavior and cloud integration requirements.
 
 Foreman itself remains a separate runtime dependency:
 

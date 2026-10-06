@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "thruwire",
-  "version": "0.1.0",
-  "description": "Work with ThruWire factories through the hosted MCP server",
+  "version": "0.1.1",
+  "description": "Work with ThruWire projects through the hosted MCP server",
   "author": {
     "name": "ThruWire",
     "url": "https://thruwire.ai"
@@ -15,8 +15,8 @@
     "com.openai": {
       "interface": {
         "displayName": "ThruWire",
-        "shortDescription": "Connect to ThruWire factories",
-        "longDescription": "Use the hosted ThruWire MCP server to inspect factories, read graph and artifact state, and perform factory work you authorize. Authenticate with your own ThruWire account. Monitoring responsibilities and reporting destinations are configured separately.",
+        "shortDescription": "Connect to ThruwWire projects",
+        "longDescription": "Use the hosted ThruWire MCP server to inspect projects, read graph and artifact state, and perform factory work you authorize. Authenticate with your own ThruWire account. Monitoring responsibilities and reporting destinations are configured separately.",
         "developerName": "ThruWire",
         "category": "Developer Tools",
         "capabilities": ["Read", "Write"],
