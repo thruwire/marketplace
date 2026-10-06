@@ -28,12 +28,18 @@ An archive imported through ChatGPT's personal **Upload plugin archive** flow
 currently exposes the portable `mcp.json` server as desktop-only, even for an
 HTTPS endpoint. That upload alone is not a working dot connection.
 
-For a hosted ChatGPT plugin, upload this package through the OpenAI Platform
-plugin dashboard, open its **MCPs** tab, and configure and authenticate the
-server within the plugin. Complete its setup and verify the installed plugin in
-the dot's runtime. Users should install and connect **ThruWire**; no separate
-custom MCP plugin or local server is required. Dashboard registration and
-review availability are distinct from the Git marketplace package.
+This integration is intended for private use through the ThruWire marketplace
+and the owner's ChatGPT account. Public-directory submission is not required.
+For an owned, manually editable account plugin, use Plugin Creator to inspect
+the existing plugin and update its archive while preserving its identity and
+audience. A saved archive release updates the listing, but does not prove that
+the cloud runtime can connect to its MCP server.
+
+Users should install and authenticate **ThruWire** once. Verify the actual
+dot's tools, resource discovery, and a project read before enabling monitoring.
+The private account listing's cloud MCP binding is still being verified;
+do not create a second custom MCP plugin as a substitute or describe the
+portable marketplace package as a proven dot installation.
 
 Give the dot the factory identity, the reporting destination, and what should
 trigger a report. Connect Slack separately and add the dot to the target channel.
