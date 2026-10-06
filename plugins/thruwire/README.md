@@ -24,9 +24,10 @@ itself establish a ChatGPT cloud connection. Install and authenticate this packa
 in the ChatGPT account used by the dot, then verify that the dot can read the
 intended factory. Local and Git marketplace availability varies by surface.
 
-An archive imported through ChatGPT's personal **Upload plugin archive** flow
-currently exposes the portable `mcp.json` server as desktop-only, even for an
-HTTPS endpoint. That upload alone is not a working dot connection.
+Imported plugins with `mcp.json` or `.mcp.json` are desktop-only, including
+remote HTTPS endpoints, under the host's documented restriction. That import
+alone is not a working cloud dot connection. See
+[desktop-only plugins](https://learn.chatgpt.com/docs/enterprise/plugin-management#desktop-only-plugins).
 
 This integration is intended for private use through the ThruWire marketplace
 and the owner's ChatGPT account. Public-directory submission is not required.
@@ -37,9 +38,13 @@ the cloud runtime can connect to its MCP server.
 
 Users should install and authenticate **ThruWire** once. Verify the actual
 dot's tools, resource discovery, and a project read before enabling monitoring.
-The private account listing's cloud MCP binding is still being verified;
-do not create a second custom MCP plugin as a substitute or describe the
-portable marketplace package as a proven dot installation.
+No supported direct cloud MCP binding has been established for this imported
+listing. A dot check through its connected computer reached the existing
+ThruWire server but failed initialization with `Auth required`; its tools,
+resources, and project read remain unverified in that runtime. Complete the
+host's supported authentication and repeat those checks. Do not create a
+second custom MCP plugin as a substitute or describe the portable marketplace
+package as a proven dot installation.
 
 Give the dot the factory identity, the reporting destination, and what should
 trigger a report. Connect Slack separately and add the dot to the target channel.
