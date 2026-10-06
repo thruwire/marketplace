@@ -13,10 +13,9 @@ currently no `foreman setup` command that combines them.
 Basic supervision requires `foreman-core >= 0.4.1`. Central repository allowlists and locally
 defined declarative responsibilities require **0.4.2 or newer**.
 
-**Release status:** the 0.4.2 configuration capabilities are being prepared and have passed local
-tests, but have not been published to PyPI yet. The advanced configuration below is a setup
-recipe; do not apply it to 0.4.1 or install a source branch as a workaround. This guide must be
-updated when the release is published.
+**Release status:** [Foreman 0.4.2](https://github.com/thruwire/foreman/releases/tag/v0.4.2)
+is published on [PyPI](https://pypi.org/project/foreman-core/0.4.2/). Install the published package
+before applying the advanced configuration below; 0.4.1 does not support it.
 
 ## 2. Install the published package
 
@@ -49,7 +48,7 @@ foreman --version
 ```
 
 `--version` is available starting with 0.4.2. For an older release, `pipx list` or `uv tool list`
-shows the installed package version. Once 0.4.2 is published, install it from PyPI before using
+shows the installed package version. Install 0.4.2 or newer from PyPI before using
 the remaining advanced configuration steps.
 
 ## 3. Configure the TypeSafe credential

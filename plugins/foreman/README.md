@@ -11,7 +11,7 @@ The plugin source is maintained in this directory and published through the
 
 Follow the [complete setup guide](SETUP.md) for the ordered configuration steps, including
 credentials, local responsibilities, verification, explicit hook trust, and a fresh session.
-It includes generic local responsibility configuration for the upcoming Foreman 0.4.2 release.
+It includes generic local responsibility configuration supported by Foreman 0.4.2 and newer.
 
 ## Architecture
 

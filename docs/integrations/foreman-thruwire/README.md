@@ -4,7 +4,7 @@ This example keeps ThruWire-specific routing, guidance, and one recurring check 
 local Foreman configuration. Foreman's open-source runtime provides the generic declarative
 responsibility implementation and contains no ThruWire-specific routing logic.
 
-It requires `foreman-core >= 0.4.2`. That release is currently prepared but not yet published;
+It requires the published `foreman-core >= 0.4.2` package from PyPI;
 do not load this configuration with 0.4.1. Follow the complete [Foreman setup guide](../../../plugins/foreman/SETUP.md) for
 PyPI installation, Foreman's TypeSafe credential, local configuration, verification, and hook trust.
 

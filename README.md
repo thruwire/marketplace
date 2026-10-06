@@ -43,7 +43,7 @@ session. ThruWire installation and OAuth are documented separately in the
 
 The optional [Foreman–ThruWire integration guide](docs/integrations/foreman-thruwire/README.md)
 is outside both plugin packages. It keeps project-specific checks in local configuration and
-requires the forthcoming Foreman 0.4.2 PyPI release.
+requires Foreman 0.4.2 or newer from PyPI.
 
 ## Claude Code
 
