@@ -6,11 +6,12 @@ and assets before installation, so the Plugins Directory can render complete lis
 
 ## Codex
 
-Add the marketplace and install Foreman:
+Add the marketplace and install a plugin:
 
 ```bash
 codex plugin marketplace add thruwire/marketplace
 codex plugin add foreman@thruwire
+codex plugin add thruwire@thruwire
 ```
 
 The catalog entry in [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) points
@@ -18,6 +19,12 @@ to the package at [`plugins/foreman`](plugins/foreman). Keeping the complete pac
 `assets/icon.png` and `assets/logo.svg`—inside the marketplace checkout lets the Plugins Directory
 render Foreman's name, description, and icon before installation. Users do not need a local clone
 of either repository.
+
+The [ThruWire plugin](plugins/thruwire) connects to the hosted factory MCP server.
+It uses the installing user's ThruWire authentication and has no local runtime
+dependency. For cloud dots, install and authenticate it in the dot's ChatGPT
+account as well; the Codex-local connection is separate. See the package README
+for archive installation and monitoring setup.
 
 Foreman itself remains a separate runtime dependency:
 

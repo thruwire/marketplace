@@ -1,0 +1,54 @@
+<svg version="1.1" viewBox="120 165 150 150" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <!-- UPPER REGION -->
+    
+    <!-- Left upper: horizontal from edge to x=155, then down to wire at y≈250 -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M134.4 205 L155 205 L155 250" fill="none"/>
+    <circle cx="134.4" cy="205" r="5" fill="currentColor"/>
+    
+    <!-- Upper left-center: from edge down to rail, rail to x=170, down to wire at y≈235 -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M160 179.4 L160 205 L175 205 L175 232" fill="none"/>
+    <circle cx="160" cy="179.4" r="5" fill="currentColor"/>
+    
+    <!-- Top center: straight down to wire -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M195 170 L195 240" fill="none"/>
+    <circle cx="195" cy="170" r="5" fill="currentColor"/>
+    
+    <!-- Upper right-center: from edge down to rail, rail over, down to wire -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M230 179.4 L230 205 L215 205 L215 248" fill="none"/>
+    <circle cx="230" cy="179.4" r="5" fill="currentColor"/>
+    
+    <!-- Right upper: horizontal from edge to x=235, then down to wire at y≈230 -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M255.6 205 L238 205 L238 228" fill="none"/>
+    <circle cx="255.6" cy="205" r="5" fill="currentColor"/>
+    
+    <!-- LOWER REGION -->
+    
+    <!-- Left lower: horizontal from edge to x=155, then up to wire at y≈250 -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M134.4 275 L155 275 L155 250" fill="none"/>
+    <circle cx="134.4" cy="275" r="5" fill="currentColor"/>
+    
+    <!-- Lower left-center: from edge up to rail, rail to x=170, up to wire -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M160 300.6 L160 275 L175 275 L175 252" fill="none"/>
+    <circle cx="160" cy="300.6" r="5" fill="currentColor"/>
+    
+    <!-- Bottom center: straight up to wire -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M195 310 L195 240" fill="none"/>
+    <circle cx="195" cy="310" r="5" fill="currentColor"/>
+    
+    <!-- Lower right-center: from edge up to rail, rail over, up to wire -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M230 300.6 L230 275 L215 275 L215 252" fill="none"/>
+    <circle cx="230" cy="300.6" r="5" fill="currentColor"/>
+    
+    <!-- Right lower: horizontal from edge to x=235, then up to wire at y≈230 -->
+    <path stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" d="M255.6 275 L238 275 L238 232" fill="none"/>
+    <circle cx="255.6" cy="275" r="5" fill="currentColor"/>
+    
+    <!-- Main flowing wire - drawn LAST so it's on top -->
+    <path stroke="currentColor" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" d="M125 240 C155 260, 175 220, 195 240 C215 260, 235 220, 265 240" fill="none"/>
+    
+    <!-- Dots at wire endpoints -->
+    <circle cx="125" cy="240" r="6" fill="currentColor"/>
+    <circle cx="265" cy="240" r="6" fill="currentColor"/>
+  </g>
+</svg>
