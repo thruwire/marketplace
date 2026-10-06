@@ -25,9 +25,9 @@
           "List my ThruWire factories.",
           "Show the status of my ThruWire factory without changing it."
         ],
-        "brandColor": "#FF6500",
+        "brandColor": "#1F2933",
         "composerIcon": "./assets/icon.png",
-        "logo": "./assets/logo.svg"
+        "logo": "./assets/logo.png"
       }
     }
   }

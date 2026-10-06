@@ -25,8 +25,9 @@ intended factory. Local and Git marketplace availability varies by surface.
 
 For a personal cloud installation, ZIP the contents of this directory with
 `plugin.json` and `mcp.json` at the archive root, open ChatGPT Plugins, and choose
-**Add → Upload plugin archive**. Complete connection setup for the hosted MCP server.
-If the account requires registering the remote MCP connection separately, use
+**Add → Upload plugin archive**. In the tested ChatGPT web flow, this imports a
+listing that offers **Open in desktop app**; it does not establish dot tool access.
+To register the hosted MCP connection for a cloud dot separately, use
 **Add → Create custom MCP server** with the same URL and OAuth authentication.
 Verify actual tool availability after installation; package creation alone does
 not establish a working cloud connection.
