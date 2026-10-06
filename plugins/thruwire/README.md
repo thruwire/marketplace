@@ -39,12 +39,13 @@ the cloud runtime can connect to its MCP server.
 Users should install and authenticate **ThruWire** once. Verify the actual
 dot's tools, resource discovery, and a project read before enabling monitoring.
 No supported direct cloud MCP binding has been established for this imported
-listing. A dot check through its connected computer reached the existing
-ThruWire server but failed initialization with `Auth required`; its tools,
-resources, and project read remain unverified in that runtime. Complete the
-host's supported authentication and repeat those checks. Do not create a
-second custom MCP plugin as a substitute or describe the portable marketplace
-package as a proven dot installation.
+listing. During verification, supported local OAuth succeeded and a fresh local
+client discovered 36 tools and 16 resources and read the overview resource.
+That client reported no plugin provenance. A fresh delegated dot session still
+failed initialization with `Auth required`; its tools, resources, and project
+read remain unverified. Local sign-in alone does not establish access in the
+dot's runtime. Do not create a second custom MCP plugin as a substitute or
+describe the portable marketplace package as a proven dot installation.
 
 Give the dot the factory identity, the reporting destination, and what should
 trigger a report. Connect Slack separately and add the dot to the target channel.
