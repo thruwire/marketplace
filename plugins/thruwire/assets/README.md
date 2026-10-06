@@ -1,13 +1,12 @@
 # ThruWire artwork
 
-`icon.png` and `logo.png` use the exact dark artwork from
-`public/Thruwire-300.png` in
+The package uses the exact dark mark from `public/Thruwire-300.png` in
 [`thruwire/thruwire-dot-ai`](https://github.com/thruwire/thruwire-dot-ai).
-The original 300 × 300 pixels are preserved, centered on a 400 × 400 white canvas.
-Only the surrounding canvas is extended, providing 50 pixels of clear space on
-each side. The artwork itself is unchanged.
+`logo.png` composites the original transparent background onto opaque white and
+adds 50 pixels of white padding on each side, for a 400 × 400 canvas. `icon.png`
+is a 256 × 256 rendering of that same padded artwork. No paths were redrawn.
 
 `logo.svg` is copied without modification from `public/Thruwire.svg` in the same
 repository and matches [the live website asset](https://thruwire.ai/Thruwire.svg).
-The package uses the padded PNG for both listing artwork fields because the host
-does not reliably preserve the SVG's color-scheme styling.
+The package uses the opaque PNG for both listing artwork fields so the logo
+remains visible on dark and light plugin listings.
