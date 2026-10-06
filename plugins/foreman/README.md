@@ -9,6 +9,10 @@ This project is maintained by [ThruWire](https://thruwire.ai). It is not made, e
 The plugin source is maintained in this directory and published through the
 [ThruWire marketplace](https://github.com/thruwire/marketplace) as `foreman@thruwire`.
 
+Follow the [complete setup guide](SETUP.md) for the ordered configuration steps, including
+credentials, local responsibilities, verification, explicit hook trust, and a fresh session.
+It includes generic local responsibility configuration for the upcoming Foreman 0.4.2 release.
+
 ## Architecture
 
 ```text
@@ -77,7 +81,10 @@ Confirm the installation:
 codex plugin list --json
 ```
 
-Start a new Codex session after installation. Open `/hooks`, review the six Foreman hook definitions, and trust them. Plugin installation does not automatically trust executable hooks; Codex skips untrusted hooks.
+Configure the runtime, credentials, and responsibilities before enabling its hooks. In the desktop
+app, use Settings → Hooks; in the CLI, use `/hooks`. Review and trust all six Foreman definitions,
+then start a fresh Codex session and submit a new prompt. Plugin installation does not automatically
+trust executable hooks; Codex skips untrusted hooks. See [setup step 7](SETUP.md#7-review-and-trust-the-hooks-then-start-a-fresh-session).
 
 ## Verify setup
 
@@ -180,6 +187,11 @@ plugin hooks. If discovery still fails, report the Codex version and plugin cach
 **A tool was denied:** the reason comes from Foreman's assessment. The launcher does not invent or rewrite denials.
 
 **Completion continued once:** Foreman can reject an incomplete `Stop`. Codex converts the returned reason into one continuation prompt. Foreman uses `stop_hook_active` to avoid an infinite continuation loop.
+
+**`PreToolUse` or `Stop arrived before work_submitted`:** hooks may have been enabled during an
+existing turn, before Foreman received its initial prompt. Temporarily disable the Foreman hooks,
+verify configuration, then start a fresh session before re-enabling them. See the ordered setup
+guide; do not add separate hook copies or patch the installed runtime.
 
 ## Development
 

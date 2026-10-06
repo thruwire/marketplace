@@ -36,6 +36,15 @@ uv tool install 'foreman-core>=0.4.1'
 `pipx install 'foreman-core>=0.4.1'` is also supported. Keep `TYPESAFE_API_KEY` in the user or
 process environment; never place it in this repository, marketplace metadata, or hook definitions.
 
+Use the [Foreman setup guide](plugins/foreman/SETUP.md) for every configuration step, including
+the required hook review and trust. Configure first, trust the hooks last, and start a fresh
+session. ThruWire installation and OAuth are documented separately in the
+[ThruWire plugin guide](plugins/thruwire/README.md).
+
+The optional [Foreman–ThruWire integration guide](docs/integrations/foreman-thruwire/README.md)
+is outside both plugin packages. It keeps project-specific checks in local configuration and
+requires the forthcoming Foreman 0.4.2 PyPI release.
+
 ## Claude Code
 
 The [`.claude-plugin/`](.claude-plugin/) directory reserves the future Claude Code marketplace
