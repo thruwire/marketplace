@@ -164,7 +164,12 @@ This does not uninstall Foreman or remove `~/.foreman`. Remove `foreman-core` an
 
 **Hooks appear but do not run:** open `/hooks` and trust the current definitions. Also confirm hooks are enabled and the project is trusted.
 
-**The plugin is enabled but `/hooks` shows zero installed Foreman hooks:** restart Codex after installation, reinstall the plugin, and check again in a new session. During development, Codex CLI 0.154.0 and 0.158.0 on one test host installed and enabled the package but did not surface plugin-bundled hooks, while the same `hooks.json` and launcher passed real project-scoped Codex lifecycle tests. This matches the open [OpenAI Codex issue #39895](https://github.com/openai/codex/issues/39895), in which a portable root `plugin.json` selects a loader that suppresses bundled hooks. If the problem persists on the latest Codex release, report the host version and plugin cache path to OpenAI; do not permanently register the project-scoped test mirror as well, because duplicate hook sources run independently.
+**The plugin is enabled but `/hooks` shows zero installed Foreman hooks:** upgrade the marketplace,
+reinstall Foreman 0.1.1 or newer, and start a new session. Codex CLI 0.159.2 on the tested host
+skipped the bundled hooks when a portable root `plugin.json` was present. Foreman now uses
+`.codex-plugin/plugin.json` as its only manifest, with an explicit reference to the existing
+`hooks/hooks.json`. Do not add user or project hook copies; they would run independently of the
+plugin hooks. If discovery still fails, report the Codex version and plugin cache path.
 
 **`foreman was not found on PATH`:** run `command -v foreman` in the environment that launches Codex. GUI applications can inherit a different `PATH` than interactive shells.
 
@@ -184,7 +189,11 @@ Run all dependency-free checks:
 make check
 ```
 
-The tests cover byte-for-byte stdin and stdout forwarding, stderr separation, exit status, missing dependencies, odd paths and working directories, doctor behavior, hook registration, portable and compatibility manifest structure, and all six fixture events.
+The tests cover byte-for-byte stdin and stdout forwarding, stderr separation, exit status, missing dependencies, odd paths and working directories, doctor behavior, hook registration, Codex manifest structure, and all six fixture events.
+
+Check the package through the real Codex plugin reader with `make discovery`. This verifies that
+all six hooks come from the existing plugin configuration and makes no persistent configuration
+changes or model calls. Set `CODEX_BIN` to test a particular Codex executable.
 
 `tests/integration/fake_foreman.py` is a deterministic protocol double for exercising the installed plugin in a real Codex session when TypeSafe credentials are unavailable. It is test-only; production hooks always resolve the separately installed `foreman` executable from `PATH`.
 
@@ -220,11 +229,13 @@ real-Jev demo, expected output, and the command-provider trust boundary.
 
 This directory is the installable plugin package:
 
-- Root `plugin.json` is the portable Agent Plugins 1.0.0 manifest.
-- `extensions.com.openai.hooks` points to the bundled Codex hook configuration.
-- `.codex-plugin/plugin.json` supplies a compatibility manifest for Codex clients that inspect it.
+- `.codex-plugin/plugin.json` is the Codex-native manifest and explicitly points to the bundled
+  `hooks/hooks.json` configuration.
+- A root portable `plugin.json` is intentionally absent to avoid suppressing hook discovery in
+  affected Codex versions. This package targets Codex; the ThruWire MCP package keeps its portable
+  manifest.
 - The operational skill lives at `skills/foreman/SKILL.md`.
-- Artwork belongs in `assets/`; the manifest will reference it only after final files are added.
+- Artwork lives in `assets/` and is referenced by the Codex manifest.
 
 This repository owns both the installable package and its discovery metadata. The Codex catalog
 exposes this directory as `foreman@thruwire`. Future assistant plugins should use their own package

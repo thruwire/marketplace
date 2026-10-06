@@ -15,8 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LAUNCHER = ROOT / "scripts" / "foreman-hook"
 DOCTOR = ROOT / "scripts" / "doctor"
 HOOKS = ROOT / "hooks" / "hooks.json"
-MANIFEST = ROOT / "plugin.json"
-COMPATIBILITY_MANIFEST = ROOT / ".codex-plugin" / "plugin.json"
+MANIFEST = ROOT / ".codex-plugin" / "plugin.json"
 COMPOSER_ICON = ROOT / "assets" / "icon.png"
 LOGO = ROOT / "assets" / "logo.svg"
 SELECTIVE_PYTEST = ROOT / "examples" / "selective-pytest"
@@ -177,19 +176,16 @@ class MetadataTests(unittest.TestCase):
             self.assertNotIn("async", handler)
             self.assertEqual(handler["command"], '"${PLUGIN_ROOT}/scripts/foreman-hook"')
 
-    def test_portable_manifest_has_current_structure(self) -> None:
+    def test_codex_manifest_resolves_hooks_skills_and_presentation(self) -> None:
         payload = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual(
-            payload["$schema"],
-            "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-        )
         self.assertEqual(payload["name"], "foreman")
         self.assertRegex(payload["version"], r"^\d+\.\d+\.\d+")
         self.assertEqual(payload["author"]["name"], "ThruWire")
-        openai = payload["extensions"]["com.openai"]
-        self.assertEqual(openai["hooks"], "./hooks/hooks.json")
-        self.assertTrue((ROOT / openai["hooks"]).is_file())
-        interface = openai["interface"]
+        self.assertEqual(payload["hooks"], "./hooks/hooks.json")
+        self.assertTrue((ROOT / payload["hooks"]).is_file())
+        self.assertEqual(payload["skills"], "./skills/")
+        self.assertTrue((ROOT / payload["skills"] / "foreman" / "SKILL.md").is_file())
+        interface = payload["interface"]
         for key in (
             "displayName",
             "shortDescription",
@@ -209,7 +205,6 @@ class MetadataTests(unittest.TestCase):
         self.assertTrue((ROOT / interface["composerIcon"]).is_file())
         self.assertTrue((ROOT / interface["logo"]).is_file())
         allowed = {
-            "$schema",
             "name",
             "version",
             "description",
@@ -218,25 +213,16 @@ class MetadataTests(unittest.TestCase):
             "repository",
             "license",
             "keywords",
-            "extensions",
+            "skills",
+            "hooks",
+            "interface",
         }
         self.assertFalse(set(payload) - allowed)
         self.assertLessEqual(len(payload["name"]), 64)
         self.assertIsNotNone(re.fullmatch(r"[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?", payload["name"]))
 
-    def test_compatibility_manifest_matches_portable_identity(self) -> None:
-        portable = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        compatibility = json.loads(COMPATIBILITY_MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual(compatibility["name"], portable["name"])
-        self.assertEqual(compatibility["version"], portable["version"])
-        self.assertEqual(compatibility["description"], portable["description"])
-        self.assertEqual(compatibility["author"]["name"], "ThruWire")
-        self.assertEqual(compatibility["skills"], "./skills/")
-        self.assertEqual(
-            compatibility["interface"],
-            portable["extensions"]["com.openai"]["interface"],
-        )
-        self.assertNotIn("hooks", compatibility)
+    def test_portable_manifest_cannot_shadow_codex_hook_discovery(self) -> None:
+        self.assertFalse((ROOT / "plugin.json").exists())
 
     def test_branding_assets_are_valid_square_images(self) -> None:
         png = COMPOSER_ICON.read_bytes()
