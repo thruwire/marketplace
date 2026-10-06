@@ -17,35 +17,36 @@ Complete the host's authentication flow with your own ThruWire account. Access
 depends on that account's project permissions. Never add access tokens or account
 credentials to this package or the marketplace.
 
+## Verified local behavior
+
+The installed local plugin connects directly to the hosted endpoint using OAuth.
+The runtime identifies the server as belonging to `thruwire@thruwire`, exposes
+36 tools and 16 native resources, and successfully reads all 16 resources.
+The local host resolves the official artwork on an opaque white background
+with padding and the subtitle "Connect to ThruwWire projects".
+
+Remove an older standalone `[mcp_servers.thruwire]` entry when switching to
+this plugin. A standalone entry with the same server name takes precedence;
+even setting that entry to `enabled = false` prevents the plugin connection
+from starting. Keep the plugin enabled and use the host's authentication flow.
+No separate standalone MCP connection is required.
+
 ## Use with a cloud dot
 
-A Codex-local MCP configuration or a Git marketplace installation does not by
-itself establish a ChatGPT cloud connection. Install and authenticate this package
-in the ChatGPT account used by the dot, then verify that the dot can read the
-intended factory. Local and Git marketplace availability varies by surface.
-
+The local marketplace package and ChatGPT cloud integration are separate.
 Imported plugins with `mcp.json` or `.mcp.json` are desktop-only, including
-remote HTTPS endpoints, under the host's documented restriction. That import
-alone is not a working cloud dot connection. See
-[desktop-only plugins](https://learn.chatgpt.com/docs/enterprise/plugin-management#desktop-only-plugins).
+remote HTTPS endpoints. Importing this package does not establish a cloud dot
+connection. See [desktop-only plugins](https://learn.chatgpt.com/docs/enterprise/plugin-management#desktop-only-plugins).
 
-This integration is intended for private use through the ThruWire marketplace
-and the owner's ChatGPT account. Public-directory submission is not required.
-For an owned, manually editable account plugin, use Plugin Creator to inspect
-the existing plugin and update its archive while preserving its identity and
-audience. A saved archive release updates the listing, but does not prove that
-the cloud runtime can connect to its MCP server.
+A dot can use supported plugins installed, enabled, and connected on its owner's
+ChatGPT account, with that account's permissions. Local Codex OAuth alone does
+not authorize the cloud connection. A private cloud plugin can target the same
+hosted ThruWire endpoint without deploying another server or submitting to the
+public directory. See [custom MCP plugin setup](https://developers.openai.com/api/docs/guides/custom-mcp-server#how-to-use).
 
-Users should install and authenticate **ThruWire** once. Verify the actual
-dot's tools, resource discovery, and a project read before enabling monitoring.
-No supported direct cloud MCP binding has been established for this imported
-listing. During verification, supported local OAuth succeeded and a fresh local
-client discovered 36 tools and 16 resources and read the overview resource.
-That client reported no plugin provenance. A fresh delegated dot session still
-failed initialization with `Auth required`; its tools, resources, and project
-read remain unverified. Local sign-in alone does not establish access in the
-dot's runtime. Do not create a second custom MCP plugin as a substitute or
-describe the portable marketplace package as a proven dot installation.
+Cloud registration, account OAuth, native resource access, and the dot's project
+read must be verified separately. That integration and monitoring remain pending;
+the local package's successful validation does not establish cloud availability.
 
 Give the dot the factory identity, the reporting destination, and what should
 trigger a report. Connect Slack separately and add the dot to the target channel.
@@ -69,8 +70,9 @@ resource pagination and use returned URIs. An empty template list is valid.
 profile can hide tools. During verification, the authenticated hosted server
 exposed 16 resources.
 All 16 discovered resources were read successfully; no continuation cursor
-was returned. The server advertised no resource templates. This verifies the server, not every installation: repeat discovery
-and a read in the actual client or dot runtime. Hosts that expose only tools
+was returned. The server advertised no resource templates. The local plugin also
+successfully read every resource through the host's native resource API. Repeat
+discovery and a read in each intended client or dot runtime. Hosts that expose only tools
 need a documented resource bridge; manifest metadata cannot add host support.
 The bundled skill reports that gap rather than fabricating required context.
 
