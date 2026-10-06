@@ -41,9 +41,13 @@ class MarketplaceTests(unittest.TestCase):
                 self.assertTrue(source.startswith("./"))
                 package = (ROOT / source).resolve()
                 self.assertIn(ROOT, package.parents)
-                manifest = json.loads((package / "plugin.json").read_text(encoding="utf-8"))
+                portable_path = package / "plugin.json"
+                manifest_path = (portable_path if portable_path.is_file()
+                                 else package / ".codex-plugin" / "plugin.json")
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
                 self.assertEqual(manifest["name"], entry["name"])
-                interface = manifest["extensions"]["com.openai"]["interface"]
+                interface = (manifest["extensions"]["com.openai"]["interface"]
+                             if portable_path.is_file() else manifest["interface"])
                 for field in ("composerIcon", "logo"):
                     asset = (package / interface[field]).resolve()
                     self.assertIn(package, asset.parents)
@@ -72,8 +76,9 @@ class MarketplaceTests(unittest.TestCase):
         self.assertNotIn("hooks", manifest["extensions"]["com.openai"])
 
     def test_foreman_package_contains_resolvable_marketplace_artwork(self) -> None:
-        manifest = json.loads((FOREMAN_PLUGIN / "plugin.json").read_text(encoding="utf-8"))
-        interface = manifest["extensions"]["com.openai"]["interface"]
+        manifest = json.loads((FOREMAN_PLUGIN / ".codex-plugin" / "plugin.json").read_text(
+            encoding="utf-8"))
+        interface = manifest["interface"]
 
         self.assertEqual(manifest["name"], "foreman")
         self.assertEqual(interface["displayName"], "Foreman")

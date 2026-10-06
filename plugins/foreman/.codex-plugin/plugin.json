@@ -1,6 +1,6 @@
 {
   "name": "foreman",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An agent supervisor and software factory foreman powered by TypeSafe’s Jev model",
   "author": {
     "name": "ThruWire",
@@ -16,6 +16,7 @@
     "coding-agents"
   ],
   "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Foreman",
     "shortDescription": "A Jev-powered supervisor for coding agents",

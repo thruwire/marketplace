@@ -1,0 +1,66 @@
+# Requires published foreman-core >= 0.4.2. Edit and save as ~/.foreman/config.toml.
+# Merge with existing settings; replace every path and project placeholder locally.
+[hooks]
+repositories = [
+  "/absolute/path/to/foreman",
+  "/absolute/path/to/agent-framework",
+  "/absolute/path/to/frontend",
+  "/absolute/path/to/compiler-service",
+  "/absolute/path/to/project-service",
+  "/absolute/path/to/api-service",
+]
+
+[hooks.responsibilities."core.completion"]
+enabled = false
+
+[hooks.responsibilities."core.verification"]
+enabled = false
+
+[hooks.responsibilities."core.worker-health"]
+enabled = false
+
+[hooks.responsibilities."core.human-escalation"]
+enabled = false
+
+[hooks.responsibilities."repository.instructions"]
+enabled = false
+
+[hooks.responsibilities."quality.documentation"]
+enabled = false
+
+[hooks.responsibilities."thruwire.project-context"]
+kind = "declarative"
+always = false
+routing_instructions = """
+Does the incoming prompt ask for development, coding, debugging, testing, code review,
+build work, or software architecture in the current repository? Match those requests.
+Do not match unrelated conversation, personal planning, or prose unrelated to software work.
+"""
+routing_threshold = 0.75
+context = """
+Before coding, consult the existing ThruWire plugin's live MCP context. Discover and read the
+native resources relevant to this work, then verify the configured project's current state.
+The default project is YOUR_PROJECT_NAME (YOUR_PROJECT_ID). Use an explicit repository-to-project
+binding if the user has supplied one. An empty project is valid; do not invent its contents.
+Use completed, successful MCP reads as evidence. If authentication, native resources, or the
+project are unavailable, report the exact gap and continue independent repository work.
+Project consultation is read-only: leave blocks, artifacts, tasks, and other project state
+unchanged unless the user has explicitly requested a separate project mutation.
+"""
+failure_action = "steer"
+failure_message = """
+Consult the current ThruWire project through the installed plugin before proceeding with
+repository-changing work. If the connection or required context is unavailable, report the
+specific access problem accurately rather than claiming a successful read.
+"""
+
+[hooks.responsibilities."thruwire.project-context".checks.project_context_consulted]
+instructions = """
+Has the worker handled the current work's ThruWire context requirement by completing successful,
+relevant project/resource reads through the installed plugin, or by accurately reporting a
+concrete authentication, resource, or project-access blocker? A planned read, proposed PreToolUse
+call, general claim of access, or context from unrelated earlier work is not proof. Do not require
+project changes or fail merely because the project is empty. Answer yes for demonstrated current
+consultation or an accurately reported blocker; otherwise answer no.
+"""
+min_threshold = 0.80
