@@ -1,0 +1,12 @@
+{
+  "name": "foreman-deepagents",
+  "version": "0.1.0",
+  "description": "Foreman supervision for LangChain Deep Agents Code (dcode).",
+  "author": { "name": "ThruWire", "url": "https://thruwire.ai" },
+  "homepage": "https://github.com/thruwire/marketplace/tree/main/plugins/foreman-deepagents",
+  "repository": "https://github.com/thruwire/marketplace",
+  "license": "MIT",
+  "keywords": ["deepagents", "dcode", "foreman", "supervision"],
+  "skills": "./skills",
+  "hooks": "./hooks/hooks.json"
+}

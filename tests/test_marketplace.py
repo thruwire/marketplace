@@ -87,9 +87,19 @@ class MarketplaceTests(unittest.TestCase):
             self.assertTrue(asset.startswith("./assets/"))
             self.assertTrue((FOREMAN_PLUGIN / asset).is_file())
 
-    def test_claude_is_only_a_placeholder(self) -> None:
+    def test_deepagents_catalog_keeps_host_specific_packages_separate(self) -> None:
         self.assertTrue(CLAUDE_PLACEHOLDER.is_file())
-        self.assertFalse((ROOT / ".claude-plugin" / "marketplace.json").exists())
+        catalog = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text())
+        self.assertEqual(catalog["name"], "thruwire")
+        self.assertEqual([p["name"] for p in catalog["plugins"]], ["foreman-deepagents"])
+        for entry in catalog["plugins"]:
+            package = (ROOT / entry["source"]).resolve()
+            self.assertIn(ROOT, package.parents)
+            manifest = json.loads((package / ".claude-plugin" / "plugin.json").read_text())
+            self.assertEqual(manifest["name"], entry["name"])
+            self.assertTrue((package / manifest["hooks"]).is_file())
+        codex = json.loads(MARKETPLACE.read_text())
+        self.assertNotIn("foreman-deepagents", [p["name"] for p in codex["plugins"]])
 
 
 if __name__ == "__main__":

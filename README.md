@@ -45,10 +45,30 @@ The optional [Foreman–ThruWire integration guide](docs/integrations/foreman-th
 is outside both plugin packages. It keeps project-specific checks in local configuration and
 requires Foreman 0.4.2 or newer from PyPI.
 
+## Deep Agents Code
+
+Install Foreman core and Deep Agents Code separately, then install the dcode plugin:
+
+```bash
+uv tool install 'foreman-core>=0.5.0'
+uv tool install --python 3.12 'deepagents-code>=0.1.83'
+dcode plugin marketplace add thruwire/marketplace
+dcode plugin install foreman-deepagents@thruwire
+```
+
+Follow the [Deep Agents plugin guide](plugins/foreman-deepagents/README.md) to
+configure protected central credentials, repository scope, and responsibilities
+before enabling hooks and starting a fresh session. Choose this plugin or
+`foreman deepagents setup` to avoid duplicate assessments.
+
+dcode reads the separate Claude-format catalog at
+[`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). The existing
+Codex catalog and Foreman Codex package remain unchanged.
+
 ## Claude Code
 
-The [`.claude-plugin/`](.claude-plugin/) directory reserves the future Claude Code marketplace
-location. There is no Claude marketplace or Claude plugin in this repository yet.
+The `.claude-plugin/` catalog format is also understood by dcode. The Deep Agents
+package targets dcode; there is no supported Claude Code plugin here yet.
 
 ## Development
 
@@ -57,6 +77,10 @@ Validate the catalog with:
 ```bash
 make check
 ```
+
+With `deepagents-code >= 0.1.83` installed in the Python environment, also run
+`python tests/integration/check_deepagents.py`. It installs into a disposable
+profile and verifies native plugin discovery and control responses without API calls.
 
 Add future products as additional entries rather than creating a marketplace per product. The
 stable marketplace identifier is `thruwire`; `ThruWire Plugins` is its user-facing display name.
