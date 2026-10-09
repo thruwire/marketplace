@@ -1,0 +1,102 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${PLUGIN_ROOT}/scripts/foreman-hook\"",
+            "argv": [
+              "${PLUGIN_ROOT}/scripts/foreman-hook"
+            ],
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

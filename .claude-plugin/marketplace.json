@@ -1,0 +1,15 @@
+{
+  "name": "thruwire",
+  "owner": {
+    "name": "ThruWire",
+    "url": "https://thruwire.ai"
+  },
+  "plugins": [
+    {
+      "name": "foreman-deepagents",
+      "source": "./plugins/foreman-deepagents",
+      "description": "Foreman lifecycle supervision for LangChain Deep Agents Code (dcode).",
+      "author": { "name": "ThruWire" }
+    }
+  ]
+}

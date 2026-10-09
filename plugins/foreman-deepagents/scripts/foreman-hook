@@ -1,0 +1,10 @@
+#!/bin/sh
+
+foreman_executable=$(command -v foreman 2>/dev/null) || {
+    printf '%s\n' \
+        'foreman Deep Agents integration: foreman was not found on PATH; install foreman-core >= 0.5.0 with `uv tool install foreman-core` or `pipx install foreman-core`.' \
+        >&2
+    exit 127
+}
+
+exec "$foreman_executable" hook --client deepagents
